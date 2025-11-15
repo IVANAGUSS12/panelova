@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+{% block title %}Servicio - Panel OVA{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-header">
+    <h2>Solicitudes / Servicio</h2>
+    <p>Listado filtrable por fecha de cirugía, estado, cobertura y médico.</p>
+  </div>
+  <form method="get" class="filters">
+    {{ form.as_p }}
+    <button type="submit" class="btn-secondary">Filtrar</button>
+  </form>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Cobertura</th>
+        <th>Médico</th>
+        <th>Servicio</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for p in patients %}
+      <tr>
+        <td>{{ p.tracking_id }}</td>
+        <td>{{ p.full_name }}</td>
+        <td>{{ p.coverage }}</td>
+        <td>{{ p.doctor }}</td>
+        <td>{{ p.service }}</td>
+        <td>{{ p.planned_date }}</td>
+        <td>{{ p.get_status_display }}</td>
+        <td><a href="{% url 'core:patient_detail' p.pk %}">Ver</a></td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="8">No hay pacientes.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

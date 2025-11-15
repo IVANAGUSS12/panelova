@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+{% block title %}Detalle paciente - Panel OVA{% endblock %}
+{% block content %}
+<section class="card">
+  <div class="card-header">
+    <h2>{{ patient.full_name }} - {{ patient.tracking_id }}</h2>
+    <p>DNI: {{ patient.dni }} | Cobertura: {{ patient.coverage }}</p>
+  </div>
+
+  <div class="detail-grid">
+    <div>
+      <h3>Datos</h3>
+      <p><strong>Médico:</strong> {{ patient.doctor }}</p>
+      <p><strong>Servicio:</strong> {{ patient.service }}</p>
+      <p><strong>Fecha probable intervención:</strong> {{ patient.planned_date }}</p>
+      <p><strong>Estado actual:</strong> {{ patient.get_status_display }}</p>
+      <p><strong>Observaciones externas:</strong> {{ patient.external_observations|default:"-" }}</p>
+    </div>
+    <div>
+      <h3>Estado & Observaciones internas</h3>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="update_status" value="1">
+        <label>Estado</label>
+        <select name="status">
+          {% for value,label in patient.STATUS_CHOICES %}
+            <option value="{{ value }}" {% if value == patient.status %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+        <label>Observaciones internas</label>
+        <textarea name="internal_observations" rows="4">{{ patient.internal_observations }}</textarea>
+        <button type="submit" class="btn-primary">Guardar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="detail-grid">
+    <div>
+      <h3>Adjuntos</h3>
+      <ul class="attachments-list">
+        {% for a in patient.attachments.all %}
+          <li>
+            {{ a.get_type_display }} - {{ a.uploaded_at }}
+            <a href="{{ a.file.url }}" target="_blank">Ver/Descargar</a>
+          </li>
+        {% empty %}
+          <li>Sin archivos adjuntos.</li>
+        {% endfor %}
+      </ul>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="add_attachment" value="1">
+        {{ attachment_form.as_p }}
+        <button type="submit" class="btn-secondary">Agregar archivo</button>
+      </form>
+    </div>
+    <div>
+      <h3>Reprogramación</h3>
+      <p>Última reprogramación: {{ patient.last_reprogram_date|default:"-" }}</p>
+      <p>Motivo: {{ patient.last_reprogram_reason|default:"-" }}</p>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="reprogram" value="1">
+        {{ reprogram_form.as_p }}
+        <button type="submit" class="btn-secondary">Reprogramar</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

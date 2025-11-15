@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Calendario - Panel OVA{% endblock %}
+
+{% block content %}
+<section class="card">
+  <div class="card-header">
+    <h2>Calendario de intervenciones</h2>
+  </div>
+  <div id="calendar"></div>
+</section>
+
+<script src="{% static 'core/js/calendar.js' %}"></script>
+{% endblock %}

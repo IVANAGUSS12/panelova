@@ -1,0 +1,441 @@
+/* ================================
+   ESTILO GENERAL PANEL OVA
+   ================================ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0b0c10;
+    color: #f5f5f5;
+}
+
+/* Contenedor principal */
+
+.container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Topbar */
+
+.topbar {
+    background: #0b0c10;
+    border-bottom: 1px solid #1f2833;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+}
+
+.logo {
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #66fcf1;
+    font-size: 1.05rem;
+}
+
+.main-nav {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.main-nav a {
+    color: #c5c6c7;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.main-nav a:hover {
+    color: #ffffff;
+}
+
+.main-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #45a29e;
+    transition: width 0.18s ease-out;
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.user-label {
+    color: #c5c6c7;
+}
+
+.logout-link {
+    color: #66fcf1;
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    color: #4b4e52;
+}
+
+/* Layout principal */
+
+.main {
+    padding: 1.5rem 0 2.5rem;
+}
+
+/* Cards */
+
+.card {
+    background: #1f2833;
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    margin-bottom: 1rem;
+}
+
+.card-header h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.3rem;
+}
+
+.card-sub {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #c5c6c7;
+}
+
+/* Texto */
+
+h1, h2, h3, h4 {
+    font-weight: 500;
+}
+
+/* Botones */
+
+.btn-primary {
+    background: #45a29e;
+    border-radius: 999px;
+    border: none;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.9rem;
+    color: #0b0c10;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.15s ease-out, transform 0.05s ease-out;
+}
+
+.btn-primary:hover {
+    background: #66fcf1;
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Formularios genéricos */
+
+form {
+    margin: 0;
+}
+
+label {
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: #050608;
+    border-radius: 6px;
+    border: 1px solid #1f2833;
+    color: #f5f5f5;
+    font-size: 0.9rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #45a29e;
+    box-shadow: 0 0 0 1px rgba(69, 162, 158, 0.4);
+}
+
+/* Campos de filtro (vista Servicio) */
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.75rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.filters button {
+    justify-self: flex-start;
+}
+
+/* Tablas */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.87rem;
+    margin-top: 0.5rem;
+}
+
+thead {
+    background: #0b0c10;
+}
+
+th, td {
+    padding: 0.4rem 0.6rem;
+    text-align: left;
+    border-bottom: 1px solid #232d3b;
+}
+
+th {
+    font-weight: 500;
+    color: #c5c6c7;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+tbody tr:nth-child(even) {
+    background: #121822;
+}
+
+tbody tr:hover {
+    background: #141d27;
+}
+
+a {
+    color: #66fcf1;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+/* ================================
+   FORMULARIO QR
+   ================================ */
+
+.card-form {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.form-qr .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    color: #c5c6c7;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: #050608;
+    border: 1px solid #1f2833;
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+    color: #f5f5f5;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #45a29e;
+    box-shadow: 0 0 0 1px rgba(69, 162, 158, 0.5);
+}
+
+.files-title {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.file-upload-group {
+    background: #050608;
+    border-radius: 8px;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid #1f2833;
+}
+
+.file-upload-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.85rem;
+    color: #c5c6c7;
+}
+
+.custom-file-input {
+    display: none;
+}
+
+.custom-file-label {
+    display: inline-block;
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid #45a29e;
+    background: transparent;
+    color: #45a29e;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+.custom-file-label:hover {
+    background: #45a29e;
+    color: #0b0c10;
+}
+
+.file-chosen {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: #c5c6c7;
+}
+
+.form-actions {
+    margin-top: 1.5rem;
+    text-align: right;
+}
+
+.alert-success {
+    margin: 0 0 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    background: rgba(69, 162, 158, 0.15);
+    border: 1px solid #45a29e;
+    font-size: 0.9rem;
+}
+
+.badge-id {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    background: #45a29e;
+    color: #0b0c10;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* ================================
+   CALENDARIO & ESTADÍSTICAS
+   ================================ */
+
+.calendar-card {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#calendar {
+    background: #1f2833;
+    border-radius: 12px;
+    padding: 0.75rem;
+    margin-top: 0.75rem;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+}
+
+.stats-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.stats-box {
+    background: #1f2833;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+}
+
+.stats-box h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Responsive */
+
+@media (max-width: 640px) {
+    .topbar-inner {
+        gap: 0.75rem;
+        justify-content: space-between;
+    }
+
+    .main-nav {
+        display: none; /* para simplificar en móvil por ahora */
+    }
+
+    .card {
+        padding: 1.1rem 1.1rem;
+    }
+}

@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+{% block title %}Dashboard - Panel OVA{% endblock %}
+{% block content %}
+<section class="dashboard-grid">
+  <div class="card">
+    <h2>Total de solicitudes</h2>
+    <p class="big-number">{{ total }}</p>
+  </div>
+  <div class="card">
+    <h2>Por estado</h2>
+    <ul>
+      {% for row in por_estado %}
+        <li>{{ row.status }}: {{ row.c }}</li>
+      {% empty %}
+        <li>Sin datos</li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Próximas intervenciones</h2>
+    <ul>
+      {% for p in proximas %}
+        <li>{{ p.planned_date }} - {{ p.full_name }} ({{ p.service }})</li>
+      {% empty %}
+        <li>No hay intervenciones próximas.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}
