@@ -20,7 +20,6 @@ class Patient(models.Model):
         (STATUS_REPROGRAMADO, 'Reprogramado'),
     ]
 
-    # AHORA SIN EncryptedTextField
     full_name = models.CharField(max_length=255)
     dni = models.CharField(max_length=50)
     phone = models.CharField(max_length=50, blank=True, null=True)
@@ -49,8 +48,23 @@ class Patient(models.Model):
     tracking_id = models.CharField(max_length=32, unique=True, editable=False)
 
     def save(self, *args, **kwargs):
+        # 👇 Normalizar a MAYÚSCULAS
+        if self.full_name:
+            self.full_name = self.full_name.upper().strip()
+
+        if self.coverage:
+            self.coverage = self.coverage.upper().strip()
+
+        if self.doctor:
+            self.doctor = self.doctor.upper().strip()
+
+        if self.service:
+            self.service = self.service.upper().strip()
+
+        # ID de tracking
         if not self.tracking_id:
             self.tracking_id = f"OVA{int(timezone.now().timestamp())}"
+
         super().save(*args, **kwargs)
 
     def __str__(self):

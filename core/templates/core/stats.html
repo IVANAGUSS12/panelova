@@ -6,16 +6,24 @@
 {% block content %}
 <section class="card">
   <div class="card-header">
-    <h2>Estadísticas</h2>
-    <a href="{% url 'core:export_excel' %}" class="btn-secondary">Exportar Excel</a>
-    <a href="{% url 'core:export_pdf' %}" class="btn-secondary">Exportar PDF</a>
-  </div>
-  <div class="stats-grid">
     <div>
+      <h2>Estadísticas</h2>
+      <p class="card-sub">
+        Volumen de solicitudes por servicio y cobertura.
+      </p>
+    </div>
+    <div>
+      <a href="{% url 'core:export_excel' %}" class="btn-secondary">Exportar Excel</a>
+      <a href="{% url 'core:export_pdf' %}" class="btn-secondary">Exportar PDF</a>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stats-chart">
       <h3>Por servicio</h3>
       <canvas id="chartService"></canvas>
     </div>
-    <div>
+    <div class="stats-chart">
       <h3>Por cobertura</h3>
       <canvas id="chartCoverage"></canvas>
     </div>

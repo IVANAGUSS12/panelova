@@ -4,11 +4,12 @@
 {% block title %}Carga de paciente - Panel OVA{% endblock %}
 
 {% block content %}
-<section class="card card-form">
+<section class="card card-form card-qr">
+  
   <div class="card-header">
     <h2>Carga de paciente</h2>
     <p class="card-sub">
-      Complete los datos del paciente. <br>
+      Complete los datos del paciente.<br>
       <small>Complete patient details (Spanish / English).</small>
     </p>
   </div>
@@ -24,88 +25,77 @@
   <form method="post" enctype="multipart/form-data" class="form-qr">
     {% csrf_token %}
 
+    <!-- =============================
+         DATOS PERSONALES
+    ============================== -->
     <div class="form-grid">
-      <!-- Nombre -->
+
       <div class="form-group">
         <label for="full_name">Nombre y Apellido / Full name</label>
         <input type="text" id="full_name" name="full_name" required>
       </div>
 
-      <!-- DNI -->
       <div class="form-group">
         <label for="dni">DNI / ID number</label>
         <input type="text" id="dni" name="dni" required>
       </div>
 
-      <!-- Teléfono -->
       <div class="form-group">
         <label for="phone">Teléfono / Phone</label>
         <input type="text" id="phone" name="phone">
       </div>
 
-      <!-- Email -->
       <div class="form-group">
         <label for="email">Correo electrónico / Email</label>
         <input type="email" id="email" name="email">
       </div>
 
-      <!-- Cobertura -->
       <div class="form-group">
         <label for="coverage">Cobertura / Coverage</label>
         <select id="coverage" name="coverage" required>
           <option value="">Seleccione una opción / Select an option</option>
-          {% for c in coverages %}
-            <option value="{{ c }}">{{ c }}</option>
-          {% endfor %}
+          {% for c in coverages %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
         </select>
       </div>
 
-      <!-- Servicio -->
       <div class="form-group">
         <label for="service">Servicio / Service</label>
         <select id="service" name="service" required>
           <option value="">Seleccione una opción / Select an option</option>
-          {% for s in services %}
-            <option value="{{ s }}">{{ s }}</option>
-          {% endfor %}
+          {% for s in services %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
         </select>
       </div>
 
-      <!-- Médico tratante -->
       <div class="form-group">
         <label for="doctor">Médico tratante / Treating doctor</label>
         <select id="doctor" name="doctor" required>
           <option value="">Seleccione una opción / Select an option</option>
-          {% for d in doctors %}
-            <option value="{{ d }}">{{ d }}</option>
-          {% endfor %}
+          {% for d in doctors %}<option value="{{ d }}">{{ d }}</option>{% endfor %}
         </select>
       </div>
 
-      <!-- Fecha probable -->
       <div class="form-group">
         <label for="planned_date">Fecha probable de intervención / Planned date</label>
         <input type="date" id="planned_date" name="planned_date" required>
       </div>
 
-      <!-- Observaciones -->
       <div class="form-group form-group-full">
-        <label for="external_observations">
-          Observaciones para autorizaciones / External observations
-        </label>
+        <label>Observaciones para autorizaciones / External observations</label>
         <textarea id="external_observations" name="external_observations" rows="3"></textarea>
       </div>
     </div>
 
     <hr class="divider">
 
+    <!-- =============================
+         DOCUMENTACIÓN OBLIGATORIA
+    ============================== -->
     <h3 class="files-title">Documentación obligatoria / Required documents</h3>
 
     <div class="file-grid">
       <div class="file-upload-group">
         <span class="file-upload-label">DNI (frente y dorso) / National ID</span>
-        <label class="custom-file-label">
-          Subir archivo
+        <label class="custom-file-label">Subir archivo
           <input type="file" name="dni_file" class="custom-file-input" accept=".pdf,image/*" required>
         </label>
         <span class="file-chosen"></span>
@@ -113,8 +103,7 @@
 
       <div class="file-upload-group">
         <span class="file-upload-label">Credencial de cobertura / Insurance card</span>
-        <label class="custom-file-label">
-          Subir archivo
+        <label class="custom-file-label">Subir archivo
           <input type="file" name="credencial_file" class="custom-file-input" accept=".pdf,image/*" required>
         </label>
         <span class="file-chosen"></span>
@@ -122,58 +111,60 @@
 
       <div class="file-upload-group">
         <span class="file-upload-label">Orden de intervención / Surgery order</span>
-        <label class="custom-file-label">
-          Subir archivo
+        <label class="custom-file-label">Subir archivo
           <input type="file" name="orden_intervencion_file" class="custom-file-input" accept=".pdf,image/*" required>
         </label>
         <span class="file-chosen"></span>
       </div>
     </div>
 
+    <!-- =============================
+         DOCUMENTACIÓN OPCIONAL
+    ============================== -->
     <h3 class="files-title">Documentación opcional / Optional documents</h3>
 
     <div class="file-grid">
       <div class="file-upload-group">
-        <span class="file-upload-label">
-          Orden de materiales (si corresponde) / Implants or materials order
-        </span>
-        <label class="custom-file-label">
-          Subir archivo
+        <span class="file-upload-label">Orden de materiales (si corresponde)</span>
+        <label class="custom-file-label">Subir archivo
           <input type="file" name="orden_material_file" class="custom-file-input" accept=".pdf,image/*">
         </label>
         <span class="file-chosen"></span>
       </div>
 
       <div class="file-upload-group">
-        <span class="file-upload-label">
-          Resumen de HC y/o estudios previos / Medical reports & tests
-        </span>
-        <label class="custom-file-label">
-          Subir archivo
+        <span class="file-upload-label">Resumen de HC y/o estudios previos</span>
+        <label class="custom-file-label">Subir archivo
           <input type="file" name="hc_file" class="custom-file-input" accept=".pdf,image/*">
         </label>
         <span class="file-chosen"></span>
       </div>
     </div>
 
+    <!-- =============================
+         BOTÓN SUBMIT
+    ============================== -->
     <div class="form-actions">
-      <button type="submit" class="btn-primary">
-        Enviar solicitud / Submit request
-      </button>
+      <button type="submit" class="btn-primary">Enviar solicitud / Submit request</button>
     </div>
+
   </form>
 </section>
 
+<!-- BOTÓN FLOTANTE WHATSAPP -->
+<a href="https://wa.me/541155922359" class="whatsapp-btn" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+</a>
+
+
 <script>
-  // Mostrar nombre del archivo elegido
-  document.querySelectorAll('.custom-file-input').forEach(function(input) {
-    input.addEventListener('change', function (e) {
-      const fileName = e.target.files.length ? e.target.files[0].name : '';
-      const infoSpan = e.target.closest('.file-upload-group').querySelector('.file-chosen');
-      if (infoSpan) {
-        infoSpan.textContent = fileName ? 'Archivo: ' + fileName : '';
-      }
-    });
+document.querySelectorAll('.custom-file-input').forEach(input => {
+  input.addEventListener('change', function () {
+    const fileName = this.files.length ? this.files[0].name : '';
+    this.closest('.file-upload-group').querySelector('.file-chosen').textContent =
+      fileName ? "Archivo: " + fileName : "";
   });
+});
 </script>
+
 {% endblock %}
